@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "30e30a54f7c6d7fef3eccc836ad8cb91",
+    "content-hash": "482ebe358ae435fe2986c0db6f7e5d3c",
     "packages": [
         {
             "name": "html2text/html2text",
@@ -78,7 +78,7 @@
         },
         {
             "name": "hugsbrugs/php-xpath",
-            "version": "1.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hugsbrugs/php-xpath.git",
@@ -2601,6 +2601,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "hugsbrugs/php-xpath": 20,
         "voku/stop-words": 20,
         "html2text/html2text": 20
     },
