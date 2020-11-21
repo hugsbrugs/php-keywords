@@ -1,0 +1,208 @@
+[
+    {
+        "1": {
+            "naturopathe": [
+                12,
+                "0.61"
+            ],
+            "m\u00e9decines": [
+                11,
+                "0.56"
+            ],
+            "naturopathie": [
+                9,
+                "0.46"
+            ],
+            "techniques": [
+                9,
+                "0.46"
+            ],
+            "m\u00e9decine": [
+                9,
+                "0.46"
+            ],
+            "corps": [
+                7,
+                "0.36"
+            ],
+            "physique": [
+                6,
+                "0.31"
+            ],
+            "maugey": [
+                6,
+                "0.31"
+            ],
+            "lien": [
+                5,
+                "0.26"
+            ],
+            "utilisation": [
+                5,
+                "0.26"
+            ],
+            "marie": [
+                5,
+                "0.26"
+            ],
+            "\u2192": [
+                4,
+                "0.20"
+            ],
+            "massages": [
+                4,
+                "0.20"
+            ],
+            "phytologie": [
+                4,
+                "0.20"
+            ],
+            "respiration": [
+                4,
+                "0.20"
+            ],
+            "capacit\u00e9": [
+                4,
+                "0.20"
+            ],
+            "hippocrate": [
+                4,
+                "0.20"
+            ],
+            "rendez-vous": [
+                4,
+                "0.20"
+            ],
+            "\u2013": [
+                4,
+                "0.20"
+            ],
+            "\u00e9motions": [
+                4,
+                "0.20"
+            ]
+        },
+        "2": {
+            "marie maugey": [
+                5,
+                "0.26"
+            ],
+            "maugey naturopathe": [
+                4,
+                "0.20"
+            ],
+            "\u2013 hippocrate": [
+                3,
+                "0.15"
+            ],
+            "m\u00e9decines alternatives": [
+                2,
+                "0.10"
+            ],
+            "m\u00e9decine conventionnelle": [
+                2,
+                "0.10"
+            ],
+            "th\u00e9rapies compl\u00e9mentaires": [
+                2,
+                "0.10"
+            ],
+            "\u00e9lixirs floraux": [
+                2,
+                "0.10"
+            ],
+            "l'activit\u00e9 physique": [
+                2,
+                "0.10"
+            ],
+            "activit\u00e9 physique": [
+                2,
+                "0.10"
+            ],
+            "huiles essentielles": [
+                2,
+                "0.10"
+            ],
+            "techniques vibratoires": [
+                2,
+                "0.10"
+            ]
+        },
+        "3": {
+            "marie maugey naturopathe": [
+                4,
+                "0.20"
+            ],
+            "utilisation de techniques": [
+                3,
+                "0.15"
+            ],
+            "associe cette technique": [
+                3,
+                "0.15"
+            ],
+            "technique \u00e0 l\u2019\u00e9l\u00e9ment": [
+                3,
+                "0.15"
+            ],
+            "s'adresse la naturopathie": [
+                2,
+                "0.10"
+            ],
+            "utilise le terme": [
+                2,
+                "0.10"
+            ],
+            "prise en charge": [
+                2,
+                "0.10"
+            ],
+            "les \u00e9lixirs floraux": [
+                2,
+                "0.10"
+            ],
+            "marathon ou triathlon\u00a0": [
+                2,
+                "0.10"
+            ],
+            "l\u2019\u00e9limination des toxines": [
+                2,
+                "0.10"
+            ],
+            "gestion des \u00e9motions": [
+                2,
+                "0.10"
+            ],
+            "de techniques vibratoires": [
+                2,
+                "0.10"
+            ]
+        },
+        "4": {
+            "on associe cette technique": [
+                3,
+                "0.15"
+            ],
+            "associe cette technique \u00e0": [
+                3,
+                "0.15"
+            ],
+            "cette technique \u00e0 l\u2019\u00e9l\u00e9ment": [
+                3,
+                "0.15"
+            ],
+            "qui s'adresse la naturopathie": [
+                2,
+                "0.10"
+            ],
+            "la prise en charge": [
+                2,
+                "0.10"
+            ],
+            "la gestion des \u00e9motions": [
+                2,
+                "0.10"
+            ]
+        }
+    }
+]
