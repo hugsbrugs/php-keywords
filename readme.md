@@ -146,6 +146,7 @@ For the url https://naturo-paca.fr/definition-naturopathie, the library outputs 
 
 ## Unit Tests
 
+https://github.com/php-coveralls/php-coveralls
 ```
 vendor/phpunit/phpunit/phpunit --configuration phpunit.xml
 ```

@@ -126,7 +126,7 @@ class Keywords
 			// Build array form string. 
 			${'keywordsSorted'.$i} = array_filter(explode(',', ${'keywordsSorted'.$i}));			
 			${'keywordsSorted'.$i} = array_count_values(${'keywordsSorted'.$i});
-			${'keywordsSorted'.$i} = array_filter(${'keywordsSorted'.$i}, create_function('$n', "return \$n > 1;"));
+			${'keywordsSorted'.$i} = array_filter(${'keywordsSorted'.$i}, function($n){ return $n > 1; });
 			asort(${'keywordsSorted'.$i});
 			arsort(${'keywordsSorted'.$i});
 			
