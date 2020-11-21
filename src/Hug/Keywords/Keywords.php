@@ -45,22 +45,16 @@ class Keywords
 
 		# Clean Text
 
-		// Minuscule
-		$this->text = mb_strtolower($this->text, 'UTF-8');		
-
-		// Caractères spéciaux & ponctuation
+		// Lower case text
+		$this->text = mb_strtolower($this->text, 'UTF-8');
+		// Remove special chars
 		$ban_chars = ['|','/','&',':',',',';','!','?','_','*',' -','- ','...'];
 		$this->text = str_replace($ban_chars, '', $this->text);
 
-
-		// $this->text_word_count = str_word_count($this->text, 0);
+		// Count words in text
 		$this->text_word_count = count(preg_split('/\s+/', $this->text));
-		// $this->text_words = str_word_count($this->text, 1);
+		// Split text into words
 		$this->text_words = preg_split('/\s+/', $this->text);
-
-		// $this->text_words = array_diff($this->text_words, $this->stop_words);
-		// $this->text_words = array_values($this->text_words);
-
 
 		$this->sort_keywords();
 	}
