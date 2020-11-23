@@ -4,6 +4,7 @@ namespace Hug\Keywords;
 
 use voku\helper\StopWords as StopWords;
 use Hug\Xpath\Xpath as Xpath;
+use LanguageDetection\Language;
 
 /**
  *
@@ -15,20 +16,36 @@ class Keywords
 	public $max_keywords;
 
 	public $stop_words = [];
+	public $ban_chars = ['|','/','&',':',',',';','!','?','_','*',' -','- ','...','→','–','«','»','+','✔','#','¿','<','>','[',']','{','}'];
 	public $text_word_count;
 	public $text_words;
 
 	public $keywords;
 
-	function __construct($text, $lang = 'fr', $custom_stop_words = [], $max_keywords = 20)
+	/**
+	 *
+	 */
+	function __construct($text, $lang = 'auto', $custom_stop_words = [], $max_keywords = 20, $ban_chars = [])
 	{
 		$this->text = $text;
 		$this->lang = $lang;
 		$this->max_keywords = $max_keywords;
+		
+		if(count($ban_chars)>0)
+			$this->ban_chars = $ban_chars;
+
+    	if($this->lang==='auto')
+    	{
+            $ld = new Language;
+            $result = $ld->detect($this->text)->bestResults()->close();
+            $keys = array_keys($result);
+            $this->lang = $keys[0];
+            // error_log('lang : '.$this->lang);
+        }
 
 		try
 		{
-			if($this->lang!==null)
+			if(count($custom_stop_words)===0 && strlen($this->lang)===2)
 			{
 				$SW = new StopWords();
 				$this->stop_words = $SW->getStopWordsFromLanguage($this->lang);
@@ -48,8 +65,7 @@ class Keywords
 		// Lower case text
 		$this->text = mb_strtolower($this->text, 'UTF-8');
 		// Remove special chars
-		$ban_chars = ['|','/','&',':',',',';','!','?','_','*',' -','- ','...'];
-		$this->text = str_replace($ban_chars, '', $this->text);
+		$this->text = str_replace($this->ban_chars, '', $this->text);
 
 		// Count words in text
 		$this->text_word_count = count(preg_split('/\s+/', $this->text));
@@ -180,12 +196,6 @@ class Keywords
 			$title = Xpath::extract_first($html, '//title');
 
 			$meta_description = Xpath::extract_first($html, '//meta[@name="description"]/@content');
-
-			// $file = tempnam(sys_get_temp_dir(), 'tags');
-			// file_put_contents($file, $html);
-			// $report['meta'] = get_meta_tags($file);
-			// error_log('meta : ' . print_r($report['meta'], true));
-			// unlink($file);
 
 			$html = new \Html2Text\Html2Text($html, ['do_links' => 'none', 'width' => 0]);
 			$text = $html->getText();

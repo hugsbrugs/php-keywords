@@ -1,5 +1,7 @@
 # php-keywords
 
+Test my free and online [Keyword Density Checker](https://hugo.maugey.fr/tools/keyword-density-checker)
+
 This library provides PHP functions to extract keywords from HTML and text. Read [PHP DOC](https://hugsbrugs.github.io/php-keywords)
 
 [![Build Status](https://travis-ci.org/hugsbrugs/php-keywords.svg?branch=master)](https://travis-ci.org/hugsbrugs/php-keywords)
@@ -24,23 +26,33 @@ If you have HTML as input, first extract text from HTML (it also returns Title a
 $text = Keywords::get_text_from_html($html);
 ```
 
-Supported languages codes are :
-ar, bg, ca, cz, da, de, el, en, eo, es, et, fi, fr, hi, hr, hu, id, it, ka, lt, lv, nl, no, pl, pt, ro, ru, sk, sv, tr, uk, vi,
+Then call the Keyword class with text as only required parameter. In this case the library [patrickschur/language-detection](https://github.com/patrickschur/language-detection) will be used to automatically detect language.
+```php
+$Keywords = new Keywords($text);
+$kws = $Keywords->keywords;
+```
 
+If you know which language is used in your text, then pass parameter lang as second argument. It will allow to load stop words list from [voku/stop-words](https://github.com/voku/stop-words) library. Supported languages codes by this library are : ar, bg, ca, cz, da, de, el, en, eo, es, et, fi, fr, hi, hr, hu, id, it, ka, lt, lv, nl, no, pl, pt, ro, ru, sk, sv, tr, uk, vi.
 ```php
 $Keywords = new Keywords($text, $lang);
 $kws = $Keywords->keywords;
 ```
 
-If your language is not supported or if you want to use your own stop words, set 2nd argument as null and pass your own stop words array as 3rd argument. 
+If your language is not supported by [voku/stop-words](https://github.com/voku/stop-words) library or if you want to use your own stop words list, set 2nd argument as null and pass your own stop words array as 3rd argument. 
 ```php
-$Keywords = new Keywords($text, null, ['my custom stop word array']);
+$Keywords = new Keywords($text, 'auto', ['my custom stop word array']);
 $kws = $Keywords->keywords;
 ```
 
 You can optionnaly pass a 4th argument as the max numbers of keywords to be returned. Set to 20 by default. Pass 0 if you want all keywords. In all cases it only returns keywords with occurence above 1.
 ```php
 $Keywords = new Keywords($text, 'fr', [], 10);
+$kws = $Keywords->keywords;
+```
+
+You can also pass an optionnal 5th argument array containing a list of chars you want to be removed from the analysed text. The default list is : | / & : ,  ; ! ? _ *  - -  ... → – « » + ✔ # ¿ < > [ ] { }
+```php
+$Keywords = new Keywords($text, 'fr', [], 10, ['my custom chars list']);
 $kws = $Keywords->keywords;
 ```
 

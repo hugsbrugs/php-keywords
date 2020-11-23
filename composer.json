@@ -9,10 +9,12 @@
             "role": "Developer"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "hugsbrugs/php-xpath": "dev-master",
         "voku/stop-words": "dev-master",
-        "html2text/html2text": "dev-master"
+        "html2text/html2text": "dev-master",
+        "patrickschur/language-detection": "^4.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0",

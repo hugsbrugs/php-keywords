@@ -29,6 +29,7 @@ foreach ($urls as $key => $url)
 }
 
 file_put_contents(__DIR__ . '/../data/keywords.json', json_encode($keywords, JSON_PRETTY_PRINT));
+// file_put_contents(__DIR__ . '/../data/keywords.json', json_encode($keywords));
 // error_log(print_r($keywords, true));
 
 
