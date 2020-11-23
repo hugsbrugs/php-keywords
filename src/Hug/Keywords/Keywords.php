@@ -16,7 +16,7 @@ class Keywords
 	public $max_keywords;
 
 	public $stop_words = [];
-	public $ban_chars = ['|','/','&',':',',',';','!','?','_','*',' -','- ','...','→','–','«','»','+','✔','#','¿','<','>','[',']','{','}'];
+	public $ban_chars = ['|','/','=','&','.',':',',',';','!','?','_','*',' -','- ','→','–','«','»','+','✔','#','¿','<','>','[',']','{','}','(',')'];
 	public $text_word_count;
 	public $text_words;
 
@@ -40,6 +40,8 @@ class Keywords
             $result = $ld->detect($this->text)->bestResults()->close();
             $keys = array_keys($result);
             $this->lang = $keys[0];
+            if(strlen($this->lang)>2)
+            	$this->lang = substr($this->lang, 0, 2);
             // error_log('lang : '.$this->lang);
         }
 
@@ -54,6 +56,9 @@ class Keywords
 			{
 				$this->stop_words = $custom_stop_words;	
 			}
+
+			// Lower case all stop words
+			$this->stop_words = array_map(function($n){ return mb_strtolower($n, 'UTF-8'); }, $this->stop_words);
 		}
 		catch(StopWordsLanguageNotExists $e)
 		{
@@ -66,6 +71,11 @@ class Keywords
 		$this->text = mb_strtolower($this->text, 'UTF-8');
 		// Remove special chars
 		$this->text = str_replace($this->ban_chars, '', $this->text);
+		// Remove numbers
+		$this->text = preg_replace('/\d+/u', '', $this->text);
+		// Replace multiple spaces by single space
+		// $this->text = preg_replace('!\s+!', ' ', $this->text);
+		$this->text = preg_replace('/\s+/u', ' ', $this->text);
 
 		// Count words in text
 		$this->text_word_count = count(preg_split('/\s+/', $this->text));
@@ -95,7 +105,7 @@ class Keywords
 			// 1 word phrase match 
 			if ($i+0 < $this->text_word_count)
 			{
-				$word0stop = in_array($this->text_words[$i], $this->stop_words);
+				$word0stop = in_array(trim($this->text_words[$i]), $this->stop_words);
 				
 				if(!$word0stop)
 				{
@@ -106,7 +116,7 @@ class Keywords
 			// 2 word phrase match 
 			if ($i+1 < $this->text_word_count)
 			{
-				$word1stop = in_array($this->text_words[$i+1], $this->stop_words);
+				$word1stop = in_array(trim($this->text_words[$i+1]), $this->stop_words);
 				
 				if(!($word0stop||$word1stop))
 				{
@@ -117,7 +127,7 @@ class Keywords
 			// 3 word phrase match 
 			if ($i+2 < $this->text_word_count)
 			{
-				$word2stop = in_array($this->text_words[$i+2], $this->stop_words);
+				$word2stop = in_array(trim($this->text_words[$i+2]), $this->stop_words);
 				
 				if(count(array_filter([$word0stop,$word1stop,$word2stop]))<2)
 				{
@@ -128,7 +138,7 @@ class Keywords
 			// 4 word phrase match 
 			if ($i+3 < $this->text_word_count)
 			{
-				$word3stop = in_array($this->text_words[$i+3], $this->stop_words);
+				$word3stop = in_array(trim($this->text_words[$i+3]), $this->stop_words);
 				
 				if(count(array_filter([$word0stop,$word1stop,$word2stop,$word3stop]))<3)
 				{
