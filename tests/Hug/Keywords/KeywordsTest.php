@@ -56,7 +56,7 @@ final class KeywordsTest extends TestCase
      */
     public function testCanStrWordCountUtf8()
     {
-        $Keywords = new Keywords($this->text_definition_naturopathie, null);
+        $Keywords = new Keywords($this->text_definition_naturopathie, 'auto');
     	$words = $Keywords->str_word_count_utf8($this->text_definition_naturopathie);
         $this->assertEquals(2079, $words);
     }

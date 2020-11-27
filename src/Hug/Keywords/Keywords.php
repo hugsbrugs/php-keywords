@@ -5,6 +5,7 @@ namespace Hug\Keywords;
 use voku\helper\StopWords as StopWords;
 use Hug\Xpath\Xpath as Xpath;
 use LanguageDetection\Language;
+use voku\helper\StopWordsLanguageNotExists;
 
 /**
  *
@@ -39,22 +40,32 @@ class Keywords
             $ld = new Language;
             $result = $ld->detect($this->text)->bestResults()->close();
             $keys = array_keys($result);
-            $this->lang = $keys[0];
+            if(isset($keys[0]))
+			{
+	            $this->lang = $keys[0];
+			}
+			else
+			{
+				$this->lang = 'en';
+			}
+			# When language code is not 2 digit (pt-PT)
             if(strlen($this->lang)>2)
+            {
             	$this->lang = substr($this->lang, 0, 2);
+            }
             // error_log('lang : '.$this->lang);
         }
 
 		try
 		{
-			if(count($custom_stop_words)===0 && strlen($this->lang)===2)
+			if(count($custom_stop_words)>0)
 			{
-				$SW = new StopWords();
-				$this->stop_words = $SW->getStopWordsFromLanguage($this->lang);
+				$this->stop_words = $custom_stop_words;
 			}
 			else
 			{
-				$this->stop_words = $custom_stop_words;	
+				$SW = new StopWords();
+				$this->stop_words = $SW->getStopWordsFromLanguage($this->lang);
 			}
 
 			// Lower case all stop words
