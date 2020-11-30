@@ -56,6 +56,12 @@ $Keywords = new Keywords($text, 'fr', [], 10, ['my custom chars list']);
 $kws = $Keywords->keywords;
 ```
 
+The optionnal 6th argument represents minimum keyword occurence to be returned. Default value is set to 2 so only keywords with minimum 2 occurences will be returned. If you want to get all keywords including those with only 1 occurence, set this parameter to 1.
+```php
+$Keywords = new Keywords($text, 'fr', [], 10, ['my custom chars list'], 1);
+$kws = $Keywords->keywords;
+```
+
 For the url https://naturo-paca.fr/definition-naturopathie, the library outputs :
 ```
 [

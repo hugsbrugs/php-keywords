@@ -15,6 +15,7 @@ class Keywords
 	public $text;
 	public $lang;
 	public $max_keywords;
+	public $min_kwd_nb;
 
 	public $stop_words = [];
 	public $ban_chars = ['|','/','=','&','.',':',',',';','!','?','_','*',' -','- ','→','–','«','»','+','✔','#','¿','<','>','[',']','{','}','(',')'];
@@ -26,12 +27,13 @@ class Keywords
 	/**
 	 *
 	 */
-	function __construct($text, $lang = 'auto', $custom_stop_words = [], $max_keywords = 20, $ban_chars = [])
+	function __construct($text, $lang = 'auto', $custom_stop_words = [], $max_keywords = 20, $ban_chars = [], $min_kwd_nb = 2)
 	{
 		$this->text = $text;
 		$this->lang = $lang;
 		$this->max_keywords = $max_keywords;
-		
+		$this->min_kwd_nb = $min_kwd_nb;
+
 		if(count($ban_chars)>0)
 			$this->ban_chars = $ban_chars;
 
@@ -163,7 +165,10 @@ class Keywords
 			// Build array form string. 
 			${'keywordsSorted'.$i} = array_filter(explode(',', ${'keywordsSorted'.$i}));			
 			${'keywordsSorted'.$i} = array_count_values(${'keywordsSorted'.$i});
-			${'keywordsSorted'.$i} = array_filter(${'keywordsSorted'.$i}, function($n){ return $n > 1; });
+			if($this->min_kwd_nb > 0)
+			{
+				${'keywordsSorted'.$i} = array_filter(${'keywordsSorted'.$i}, function($n){ return $n >= $this->min_kwd_nb; });
+			}
 			asort(${'keywordsSorted'.$i});
 			arsort(${'keywordsSorted'.$i});
 			
